@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registration Form</title>
+<style>
+  :root {
+    --bg: #eef1f8;
+    --card: #ffffff;
+    --ink: #1c2340;
+    --muted: #6b7394;
+    --line: #d5daea;
+    --accent: #3b4fd8;
+    --error: #c62f4a;
+    --ok: #1f8a5b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px 16px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  }
+  .card {
+    width: 100%;
+    max-width: 520px;
+    background: var(--card);
+    border-radius: 14px;
+    padding: 32px 28px;
+    box-shadow: 0 10px 30px rgba(28, 35, 64, .08);
+  }
+  h1 { margin: 0 0 4px; font-size: 1.6rem; }
+  .sub { margin: 0 0 24px; color: var(--muted); font-size: .95rem; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field { margin-bottom: 16px; }
+  label { display: block; margin-bottom: 6px; font-size: .9rem; font-weight: 600; }
+  input, select {
+    width: 100%;
+    padding: 11px 12px;
+    font: inherit;
+    color: var(--ink);
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(59, 79, 216, .18);
+  }
+  .field.invalid input, .field.invalid select { border-color: var(--error); }
+  .msg { min-height: 1em; margin-top: 4px; font-size: .8rem; color: var(--error); }
+  .radios { display: flex; gap: 18px; flex-wrap: wrap; padding-top: 4px; }
+  .radios label, .check label { display: inline-flex; align-items: center; gap: 6px; margin: 0; font-weight: 400; }
+  .radios input, .check input { width: auto; accent-color: var(--accent); }
+  .check { margin-bottom: 20px; }
+  button {
+    width: 100%;
+    padding: 13px;
+    font: inherit;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent);
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  button:hover { background: #2f40b8; }
+  button:focus-visible { outline: 3px solid rgba(59, 79, 216, .4); outline-offset: 2px; }
+  .success {
+    display: none;
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #e5f5ed;
+    color: var(--ok);
+    font-weight: 600;
+    text-align: center;
+  }
+  @media (max-width: 480px) {
+    .row { grid-template-columns: 1fr; gap: 0; }
+    .card { padding: 24px 18px; }
+  }
+</style>
+</head>
+<body>
+  <main class="card">
+    <h1>Create your account</h1>
+    <p class="sub">Fill in your details to register.</p>
+
+    <form id="regForm" novalidate>
+      <div class="row">
+        <div class="field">
+          <label for="firstName">First name</label>
+          <input type="text" id="firstName" name="firstName" autocomplete="given-name">
+          <div class="msg"></div>
+        </div>
+        <div class="field">
+          <label for="lastName">Last name</label>
+          <input type="text" id="lastName" name="lastName" autocomplete="family-name">
+          <div class="msg"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com">
+        <div class="msg"></div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="phone">Mobile number</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="numeric" maxlength="10" placeholder="10-digit number">
+          <div class="msg"></div>
+        </div>
+        <div class="field">
+          <label for="dob">Date of birth</label>
+          <input type="date" id="dob" name="dob" autocomplete="bday">
+          <div class="msg"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Gender</label>
+        <div class="radios">
+          <label><input type="radio" name="gender" value="male"> Male</label>
+          <label><input type="radio" name="gender" value="female"> Female</label>
+          <label><input type="radio" name="gender" value="other"> Other</label>
+        </div>
+        <div class="msg"></div>
+      </div>
+
+      <div class="field">
+        <label for="course">Course</label>
+        <select id="course" name="course">
+          <option value="">Select a course</option>
+          <option>B.Tech CSE</option>
+          <option>B.Tech CSE (AI/ML)</option>
+          <option>B.Tech IT</option>
+          <option>BCA</option>
+          <option>MCA</option>
+          <option>Other</option>
+        </select>
+        <div class="msg"></div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" autocomplete="new-password">
+          <div class="msg"></div>
+        </div>
+        <div class="field">
+          <label for="confirm">Confirm password</label>
+          <input type="password" id="confirm" name="confirm" autocomplete="new-password">
+          <div class="msg"></div>
+        </div>
+      </div>
+
+      <div class="check field">
+        <label><input type="checkbox" id="terms" name="terms"> I agree to the terms and conditions</label>
+        <div class="msg"></div>
+      </div>
+
+      <button type="submit">Create account</button>
+      <div class="success" id="success">Registration complete.</div>
+    </form>
+  </main>
+
+<script>
+  const form = document.getElementById('regForm');
+  const success = document.getElementById('success');
+
+  function setError(el, text) {
+    const field = el.closest('.field');
+    field.classList.toggle('invalid', !!text);
+    field.querySelector('.msg').textContent = text || '';
+    return !text;
+  }
+
+  const rules = {
+    firstName: v => v.trim().length >= 2 ? '' : 'Enter your first name (at least 2 letters).',
+    lastName:  v => v.trim().length >= 1 ? '' : 'Enter your last name.',
+    email:     v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? '' : 'Enter a valid email address.',
+    phone:     v => /^[6-9]\d{9}$/.test(v) ? '' : 'Enter a valid 10-digit mobile number.',
+    dob: v => {
+      if (!v) return 'Select your date of birth.';
+      return new Date(v) < new Date() ? '' : 'Date of birth must be in the past.';
+    },
+    course:    v => v ? '' : 'Select a course.',
+    password:  v => /^(?=.*[A-Za-z])(?=.*\d).{8,}$/.test(v) ? '' : 'Use at least 8 characters with a letter and a number.',
+    confirm:   v => v === form.password.value ? '' : 'Passwords do not match.'
+  };
+
+  function validate() {
+    let ok = true;
+    for (const name in rules) {
+      const el = form.elements[name];
+      ok = setError(el, rules[name](el.value)) && ok;
+    }
+    const gender = form.querySelector('input[name="gender"]:checked');
+    ok = setError(form.querySelector('input[name="gender"]'), gender ? '' : 'Select an option.') && ok;
+    ok = setError(form.terms, form.terms.checked ? '' : 'You need to accept the terms.') && ok;
+    return ok;
+  }
+
+  // Clear an error as soon as the field is corrected
+  form.addEventListener('input', e => {
+    const name = e.target.name;
+    if (rules[name]) setError(e.target, rules[name](e.target.value));
+  });
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    success.style.display = 'none';
+    if (validate()) {
+      success.style.display = 'block';
+      // Send the data to your backend here, e.g. with fetch('/register', { method: 'POST', body: new FormData(form) })
+      form.reset();
+    }
+  });
+</script>
+</body>
+</html>
